@@ -62,9 +62,19 @@ Text.pack(padx=10,pady=10,anchor="nw")
 
 placeholder="Mesajını buraya gir.."
 Text.insert(tk.END,placeholder,"style")
+from tkinter import messagebox
 
 def gonder():
-    pass
+    last_message=""
+
+    if var.get():
+        if var.get()==1:
+            last_message+="Veriniz başarıyla sisteme kaydedildi"
+        elif var.get()==2:
+            last_message+="eposta ile kaydedildi"
+        messagebox.showinfo("Başarılı işlem",last_message)
+    else:
+        messagebox.showwarning("uyarı","işaretleyiniz")
     return
 button=tk.Button(frame_alt_sag,text="gönder",command=gonder)
 button.pack(anchor="s")
