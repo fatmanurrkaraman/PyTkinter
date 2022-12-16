@@ -68,9 +68,9 @@ class Window(BaseWindow):
         self.yildizButton=ttk.Button(self.PadFrame,width=40,text="*")
         self.kareButton=ttk.Button(self.PadFrame,width=40,text="#")
 
-        self.SubmitButton=ttk.Button(button_area,width=40,text="enter",command=self.CheckCode)
-        self.ClearButton=ttk.Button(button_area,width=40,text="Clear",command=lambda:self.Update(-1))
-        self.ExitButton=ttk.Button(button_area,width=40,text="exit")
+        self.SubmitButton=ttk.Button(button_area,width=40,text="GİRİŞ",command=self.CheckCode)
+        self.ClearButton=ttk.Button(button_area,width=40,text="TEMİZLE",command=lambda:self.Update(-1))
+        self.ExitButton=ttk.Button(button_area,width=40,text="ÇIK")
 
         self.ZeroButton.grid(row=self.Row,column=1)
         self.yildizButton.grid(row=self.Row,column=0)

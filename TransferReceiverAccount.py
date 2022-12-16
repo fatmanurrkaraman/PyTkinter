@@ -1,4 +1,5 @@
 import tkinter,tkinter.ttk as ttk
+from tkinter import messagebox
 import random
 
 
@@ -78,9 +79,9 @@ class Window(BaseWindow):
         self.kareButton=ttk.Button(self.PadFrame,width=40,text="#")
 
        
-        self.SubmitButton=ttk.Button(button_area,width=40,text="enter",command=self.CheckCode)
-        self.ClearButton=ttk.Button(button_area,width=40,text="Clear",command=lambda:self.Update(-1))
-        self.ExitButton=ttk.Button(button_area,width=40,text="exit")
+        self.SubmitButton=ttk.Button(button_area,width=40,text="GİRİŞ",command=self.CheckCode)
+        self.ClearButton=ttk.Button(button_area,width=40,text="TEMİZLE",command=lambda:self.Update(-1))
+        self.ExitButton=ttk.Button(button_area,width=40,text="ÇIK")
 
         self.ZeroButton.grid(row=self.Row,column=1)
         self.yildizButton.grid(row=self.Row,column=0)
@@ -98,33 +99,28 @@ class Window(BaseWindow):
         self.KeyEnter.pack()
 
         self.after(5,self.Change)
-
-
+  
     def Update(self,x):
-
         if self.CanWrite:
             self.KeyEnter["state"]="normal"
-
             if x==-1:
                 self.KeyEnter.delete(0,tkinter.END)
             else:
                 self.KeyEnter.insert(tkinter.END,x)
 
             self.KeyEnter["state"]="disabled"
-    
+            
     def CheckCode(self):
         Key=self.KeyEnter.get()
-
         self.Update(-1)
 
         if Key==str(self.Code):
             self.after(self.Timer,self.destroy)
-        
-
+            last_message+="Veriniz başarıyla sisteme kaydedildi"
+            messagebox.showinfo("Başarılı işlem",last_message)
         self.ChangeWritePerms()
 
         self.after(self.Timer,self.ChangeWritePerms)
-
     def ChangeWritePerms(self):
         if self.CanWrite:
             self.CanWrite=False
