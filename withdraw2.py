@@ -77,8 +77,8 @@ class Window(BaseWindow):
         self.yildizButton=ttk.Button(self.PadFrame,width=40,text="*")
         self.kareButton=ttk.Button(self.PadFrame,width=40,text="#")
 
-        self.SubmitButton=ttk.Button(button_area,width=40,text="enter")
-        self.ClearButton=ttk.Button(button_area,width=40,text="Clear")
+        self.SubmitButton=ttk.Button(button_area,width=40,text="enter",command=self.CheckCode)
+        self.ClearButton=ttk.Button(button_area,width=40,text="Clear",command=lambda:self.Update(-1))
         self.ExitButton=ttk.Button(button_area,width=40,text="exit")
 
         self.ZeroButton.grid(row=self.Row,column=1)
@@ -89,8 +89,45 @@ class Window(BaseWindow):
         self.ClearButton.grid(padx=10,pady=10)
         self.ExitButton.grid(padx=10,pady=10)
 
+        self.bind("0",lambda CatchEvent:self.Update(0))
+        self.bind("<Return>",lambda CatchEvent:self.CheckCode())
 
+        self.KeyEnter=ttk.Entry(text_area,state="disabled")
+        self.KeyEnter.pack()
 
+        self.after(5,self.Change)
 
+    def Update(self,x):
+    
+        if self.CanWrite:
+            self.KeyEnter["state"]="normal"
+
+            if x==-1:
+                self.KeyEnter.delete(0,tkinter.END)
+            else:
+                self.KeyEnter.insert(tkinter.END,x)
+
+            self.KeyEnter["state"]="disabled"
+    
+    def CheckCode(self):
+        Key=self.KeyEnter.get()
+
+        self.Update(-1)
+
+        if Key==str(self.Code):
+            self.after(self.Timer,self.destroy)
+        
+
+        self.ChangeWritePerms()
+
+        self.after(self.Timer,self.ChangeWritePerms)
+
+    def ChangeWritePerms(self):
+        if self.CanWrite:
+            self.CanWrite=False
+        else:
+            self.CanWrite=True
+            self.Update(-1)
+    
 
 Window().mainloop()
