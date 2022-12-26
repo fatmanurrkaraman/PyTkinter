@@ -6,6 +6,7 @@ master = Tk()
 canvas = Canvas(master,bg= 'indianred',height =1024, width=1895)
 canvas.pack()   # pack-place-grid
 
+
 frame_ust = Frame(master, bg= 'indianred',)
 frame_ust.place(relx=0.1, rely=0.01, relheight=0.1,relwidth=0.8)
 
